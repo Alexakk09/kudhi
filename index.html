@@ -40,12 +40,8 @@ body{
 }
 
 @keyframes float{
-    from{
-        transform:translateY(110vh);
-    }
-    to{
-        transform:translateY(-100px);
-    }
+    from{ transform:translateY(110vh); }
+    to{ transform:translateY(-100px); }
 }
 
 .card{
@@ -96,13 +92,15 @@ button{
 }
 
 #yesBtn,
-#yesBtn2{
+#yesBtn2,
+#yesBtn3{
     background:#ff4d88;
     color:white;
 }
 
 #noBtn,
-#noBtn2{
+#noBtn2,
+#noBtn3{
     background:white;
     color:#444;
     border:2px solid #eee;
@@ -127,10 +125,11 @@ button{
 
 .success h1{
     margin-top:20px;
-    font-size:2rem;
+    font-size:3rem;
 }
 </style>
 </head>
+
 <body>
 
 <div class="hearts" id="hearts"></div>
@@ -138,7 +137,7 @@ button{
 <!-- PAGE 1 -->
 <div class="card" id="page1">
 
-    <img class="photo" src="photo1.jpg" alt="">
+    <img class="photo" src="photo1.jpg">
 
     <h1>Will You Forgive Me? 🥺</h1>
 
@@ -151,17 +150,17 @@ button{
 
 </div>
 
-<!-- PAGE 2 (hidden initially) -->
+<!-- PAGE 2 -->
 <div class="card" id="page2" style="display:none;">
 
-    <img class="photo" src="photo2.jpg" alt="">
+    <img class="photo" src="photo2.jpg">
 
-    <h1 style="font-size:32px;">Khushi.exe selected NO</h1>
+    <h1>Khushi.exe selected NO</h1>
 
     <p>
-        <strong>Veer.dll</strong> has stopped working. 💔⚠️ Despite the damage, 
+        <strong>Veer.dll</strong> has stopped working. 💔⚠️ Despite the damage,
     </p>
-    
+
     <h1 style="font-size:32px;">Khushi.exe = Adorable ✅</h1>
 
     <div class="buttons">
@@ -171,64 +170,78 @@ button{
 
 </div>
 
+<!-- PAGE 3 (DEVELOPER NOTE) -->
+<div class="card" id="page3" style="display:none;">
+
+    <img class="photo" src="photo2.jpg">
+
+    <h1>Developer Note 🧾</h1>
+
+    <p style="font-size:18px;">
+        Khushi.exe was optimized for kindness, not for clicking No. 🥺🌷
+    </p>
+
+    <h1 style="font-size:28px;">Khushi.exe still running ❤️</h1>
+
+    <div class="buttons">
+        <button id="yesBtn3">Okay ❤️</button>
+        <button id="noBtn3">Still No 😭</button>
+    </div>
+
+</div>
+
 <script>
 
-// Floating Hearts
-
+// Hearts animation
 const hearts = document.getElementById("hearts");
 
 for(let i=0;i<30;i++){
-
     const heart = document.createElement("span");
-
     heart.innerHTML = "❤️";
-
     heart.style.left = Math.random()*100 + "%";
     heart.style.fontSize = (12 + Math.random()*20) + "px";
     heart.style.animationDuration = (8 + Math.random()*10) + "s";
     heart.style.animationDelay = Math.random()*8 + "s";
-
     hearts.appendChild(heart);
 }
 
 // Pages
-
 const page1 = document.getElementById("page1");
 const page2 = document.getElementById("page2");
+const page3 = document.getElementById("page3");
 
-// PAGE 1 BUTTONS
-
-document.getElementById("noBtn").addEventListener("click",()=>{
-
+// PAGE 1 → PAGE 2
+document.getElementById("noBtn").addEventListener("click", () => {
     page1.style.display = "none";
     page2.style.display = "block";
-
 });
 
-// PAGE 2 BUTTONS
-
-document.getElementById("noBtn2").addEventListener("click",()=>{
-
-    alert("Aww 😭 You can customize this part however you want!");
-
+// PAGE 2 → PAGE 3 (NEW)
+document.getElementById("noBtn2").addEventListener("click", () => {
+    page2.style.display = "none";
+    page3.style.display = "block";
 });
 
-// Success Function
-
-function showSuccess(){
-
+// PAGE 3 → FINAL NO (optional end screen)
+document.getElementById("noBtn3").addEventListener("click", () => {
     document.body.innerHTML = `
-
     <div class="success">
+        <img src="photo2.jpg">
+        <h1>Okay... 😔</h1>
+        <p>System accepted your decision.</p>
+    </div>
+    `;
+});
 
+// SUCCESS FUNCTION
+function showSuccess(){
+    document.body.innerHTML = `
+    <div class="success">
         <img src="success.jpg">
-
         <h1>YAYYY ❤️</h1>
-
         <p style="font-size:1.2rem;">
             Thank you!! You make me so happy 😭❤️
         </p>
-
         <p style="
         margin-top:8px;
         font-size:32px;
@@ -237,14 +250,14 @@ function showSuccess(){
         ">
         Meri Pyaari Khushi 🌷❤️
         </p>
-
     </div>
-
     `;
 }
 
-document.getElementById("yesBtn").addEventListener("click",showSuccess);
-document.getElementById("yesBtn2").addEventListener("click",showSuccess);
+// YES BUTTONS
+document.getElementById("yesBtn").addEventListener("click", showSuccess);
+document.getElementById("yesBtn2").addEventListener("click", showSuccess);
+document.getElementById("yesBtn3").addEventListener("click", showSuccess);
 
 </script>
 
