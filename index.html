@@ -1,63 +1,251 @@
-noBtn.addEventListener("click",()=>{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Forgive Me? 🥺</title>
 
-document.body.innerHTML=`
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<div class="success">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-<h1>💻 Crash Report</h1>
+body{
+    background:#ffe4ec;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+}
 
-<p style="
-font-size:24px;
-margin-top:20px;
-font-weight:600;
-">
-Khushi.exe selected No.
-</p>
+.hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
 
-<p style="
-font-size:24px;
-font-weight:600;
-">
-Veer.dll has stopped working. 💔⚠️
-</p>
+.hearts span{
+    position:absolute;
+    color:#ff7aa5;
+    opacity:.25;
+    animation:float linear infinite;
+}
 
-<p style="
-margin-top:20px;
-font-size:28px;
-color:#ff4d88;
-font-weight:700;
-">
-Despite the damage,
-<br>
-Khushi.exe = adorable ✅
-</p>
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+    }
+    to{
+        transform:translateY(-100px);
+    }
+}
 
-<p style="
-margin-top:15px;
-font-size:18px;
-color:#777;
-">
-This incident has been reported to the Department of Broken Hearts 😭❤️
-</p>
+.card{
+    width:92%;
+    max-width:520px;
+    background:white;
+    padding:45px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(255,77,136,.15);
+    z-index:10;
+}
 
-<button
-onclick="location.reload()"
-style="
-margin-top:25px;
-padding:14px 28px;
-border:none;
-border-radius:14px;
-background:#ff4d88;
-color:white;
-font-size:18px;
-font-weight:600;
-cursor:pointer;
-">
-Try Again ❤️
-</button>
+.photo{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    margin-bottom:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+h1{
+    color:#ff4d88;
+    margin-bottom:10px;
+    font-size:42px;
+}
+
+p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+button{
+    border:none;
+    border-radius:14px;
+    padding:14px 26px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+#yesBtn,
+#yesBtn2{
+    background:#ff4d88;
+    color:white;
+}
+
+#noBtn,
+#noBtn2{
+    background:white;
+    color:#444;
+    border:2px solid #eee;
+}
+
+.success{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    height:100vh;
+}
+
+.success img{
+    width:340px;
+    height:340px;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.success h1{
+    margin-top:20px;
+    font-size:4rem;
+}
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+
+    <img class="photo" src="photo1.jpg" alt="">
+
+    <h1>Will You Forgive Me? 🥺</h1>
+
+    <p>Choose carefully ❤️</p>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 😭</button>
+    </div>
 
 </div>
 
-`;
+<!-- PAGE 2 (hidden initially) -->
+<div class="card" id="page2" style="display:none;">
+
+    <img class="photo" src="photo2.jpg" alt="">
+
+    <h1>Really No? 🥺</h1>
+
+    <p>
+        Please think once more...
+        You mean a lot to me ❤️
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn2">Okay ❤️</button>
+        <button id="noBtn2">Still No 😭</button>
+    </div>
+
+</div>
+
+<script>
+
+// Floating Hearts
+
+const hearts = document.getElementById("hearts");
+
+for(let i=0;i<30;i++){
+
+    const heart = document.createElement("span");
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "%";
+    heart.style.fontSize = (12 + Math.random()*20) + "px";
+    heart.style.animationDuration = (8 + Math.random()*10) + "s";
+    heart.style.animationDelay = Math.random()*8 + "s";
+
+    hearts.appendChild(heart);
+}
+
+// Pages
+
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+
+// PAGE 1 BUTTONS
+
+document.getElementById("noBtn").addEventListener("click",()=>{
+
+    page1.style.display = "none";
+    page2.style.display = "block";
 
 });
+
+// PAGE 2 BUTTONS
+
+document.getElementById("noBtn2").addEventListener("click",()=>{
+
+    alert("Aww 😭 You can customize this part however you want!");
+
+});
+
+// Success Function
+
+function showSuccess(){
+
+    document.body.innerHTML = `
+
+    <div class="success">
+
+        <img src="success.jpg">
+
+        <h1>YAYYY ❤️</h1>
+
+        <p style="font-size:1.2rem;">
+            Thank you!! You make me so happy 😭❤️
+        </p>
+
+        <p style="
+        margin-top:8px;
+        font-size:32px;
+        font-weight:700;
+        color:#ff4d88;
+        ">
+        Meri Pyaari Khushi 🌷❤️
+        </p>
+
+    </div>
+
+    `;
+}
+
+document.getElementById("yesBtn").addEventListener("click",showSuccess);
+document.getElementById("yesBtn2").addEventListener("click",showSuccess);
+
+</script>
+
+</body>
+</html>
